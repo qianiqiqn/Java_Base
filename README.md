@@ -1,2 +1,2 @@
-# Spring-Boot
-Spring Boot learning
+# Redis
+Redis learning
