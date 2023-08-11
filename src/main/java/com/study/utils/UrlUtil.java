@@ -13,8 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author: pengzhe
- * @Date: 2021/11/2 10:56
+ * @author: wenqianqian
  * @Desc: 一些发送请求的工具类
  */
 public class UrlUtil {
