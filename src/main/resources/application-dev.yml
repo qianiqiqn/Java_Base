@@ -1,0 +1,117 @@
+
+###  示例
+spring:
+  datasource:
+    db-mysql:
+      url: jdbc:mysql://10.26.0.30:3306/iot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      username: develop-one
+      password: OkqlFlS+rOj6P9qW6PFKepK0ChSIyp8xFSjPW1TeRmE1n4Mu5uEa08TaOqwN6Ct9l0yTyPcMESKvbbMe6LXr5Q==
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      connection-properties: config.decrypt=true;config.decrypt.key=${public.key.mysql}
+    db-postgresql:
+      url: jdbc:postgresql://10.26.0.31:5432/iot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      username: postgres
+      password: r68vr3Zvs6wDiOXreH87rWf3q7q+Ncr3HhNNsRLAdJx1BD98Vp+h+L6D7XqoF4CN+FMPTnvKifkm1GlTv0aHAA==
+      driver-class-name: org.postgresql.Driver
+      connection-properties: config.decrypt=true;config.decrypt.key=${public.key.postgresql}
+    druid:
+      validation-query: select 1
+      initial-size: 5
+      min-idle: 10
+      max-active: 20
+      test-on-borrow: true
+      filter:
+        config:
+          enabled: true
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 10.26.0.22:8080
+        clientIp: 10.26.0.23
+        port: ${SentinelPort:8719}
+  kafka:
+    jtj:
+      bootstrap-servers: 172.17.249.33:9092,172.17.249.34:9092,172.17.249.35:9092
+      security-protocol: SASL_PLAINTEXT
+      sasl:
+        mechanism: GSSAPI
+        jaas-config: com.sun.security.auth.module.Krb5LoginModule required debug=true useKeyTab=true storeKey=true useTicketCache=false principal="wlw_jc@SZJT.COM"
+        kerberos-service-name: kafka
+      group-id: sutpc-monitor-data
+      topic: T-WLW-SUTPC-MONITOR-DATA
+      allow-auto-create-topics: false
+      acks: 1
+      key:
+        serializer: org.apache.kafka.common.serialization.StringSerializer
+        deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value:
+        serializer: org.apache.kafka.common.serialization.StringSerializer
+        deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    sutpc:
+      consumer:
+        topic: sutpc-data-monitor
+        bootstrap-servers: 10.26.0.33:9092
+        group-id: sutpc-data
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        enable-auto-commit: true
+      alarm:
+        topic: sutpc-data-alarm
+pagehelper:
+  offset-as-page-num: true
+  row-bounds-with-count: true
+  reasonable: true
+  support-methods-arguments: false
+  helper-dialect: postgresql
+public:
+  key:
+    mysql: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIe4yfEWl8PI15h8GVjIE0pmDXNUnQrlvbXrzLpWyzZ9JT0EaAByGHlz1+/NFe821ebDFrmccOEfmSJJvrVTZRECAwEAAQ==
+    postgresql: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALwOLIQig8C+0w56Oa87Vv1m/NZgbhFodA2ASjiEDssqcOZimdORWLuXj+qVaURoglOxFTeKXZ5WT5UsDlQOTC8CAwEAAQ==
+keytab:
+  path: classpath:keytab/wlw_jc.keytab
+fabric:
+  url: http://10.26.0.28:8082
+  access-key: 9fdd13a25a
+  secret-key: 80177236825c11830dda9b61769fdab7720cc443
+  template:
+    device:
+      bucketName: group1
+      fileFullName: 设备批量注册模板_1641521680885.xlsx
+    auth-key:
+      bucketName: group1
+      fileFullName: 鉴权秘钥批量查询输入-模板_2021-11-05_896e1aa06a07451ab2f3bc1441c8743d.xlsx
+    role-device:
+      bucketName: group1
+      fileFullName: 设备列表_1639624475490.xlsx
+    monitor-region:
+      bucketName: group1
+      fileFullName: 监测区域导入模板_1646384259322.xlsx
+    monitor-point:
+      bucketName: group1
+      fileFullName: 监测点批量导入模板_1646621675324.xlsx
+
+platform:
+  product:
+    key: KVKQ29GM
+    name: 第三方平台
+job:
+  open:
+    flag: true
+mqtt:
+  broker: tcp://10.26.0.28:1883
+  username: sutpc
+  password: sutpc
+  qos: 2
+  subTopic:
+    - { topic: /fabric/sys/+/+/thing/property/set_reply, className: com.sutpc.software.mqtt.PropertyReply}
+    - { topic: /fabric/ota/device/inform/+/+, className: com.sutpc.software.mqtt.ProcessReply}
+  pubTopic: /fabric/ota/device/upgrade/#{productKey}/#{deviceName}
+devops:
+  url: http://imoc.huawei.com
+  iamUser: hcadmin001
+  iamTenant: HWCloudInfra
+  iamAk: eyJ1dWlkIjoiN0Q5NzdCNEUtREIyMC00RDlGLUE3NzAtMkE1RTgzMTJGMDMwIiwidXNlciI6ImhjYWRtaW4wMDEiLCJfdGVuYW50IjoiSFdDbG91ZEluZnJhIn0=
+  iamSk: 18B5AF99-E24B-4811-AB60-CFEA7EACA953
+  ciType: Sutpc_test
+  flag: false
