@@ -115,3 +115,10 @@ devops:
   iamSk: 18B5AF99-E24B-4811-AB60-CFEA7EACA953
   ciType: Sutpc_test
   flag: false
+
+
+  mybatis:
+    mapper-locations: mapper/*.xml
+    type-aliases-package: com.dy.details.pojo
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
