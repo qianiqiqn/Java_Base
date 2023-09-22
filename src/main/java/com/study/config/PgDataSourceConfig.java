@@ -4,24 +4,23 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.codehaus.plexus.component.annotations.Configuration;
+import org.springframework.context.annotation.Configuration;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages = {DataSourceConfig.PACKAGE}, sqlSessionFactoryRef = "postgreSqlSessionFactory")
-public class DataSourceConfig {
+@MapperScan(basePackages = {PgDataSourceConfig.PACKAGE}, sqlSessionFactoryRef = "postgreSqlSessionFactory")
+public class PgDataSourceConfig {
 
     /**
      * dao 所在的包
      */
-    public static final String PACKAGE = "com.sutpc.ruichang.expressway.mapper";
+    public static final String PACKAGE = "com.*.mapper";
 
     /**
      * mapper所在目录
@@ -41,7 +40,7 @@ public class DataSourceConfig {
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factoryBean.setMapperLocations(resolver.getResources(DataSourceConfig.MAPPER_LOCATION));
+        factoryBean.setMapperLocations(resolver.getResources(PgDataSourceConfig.MAPPER_LOCATION));
         return factoryBean.getObject();
     }
 

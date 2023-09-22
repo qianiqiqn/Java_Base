@@ -1,5 +1,17 @@
 package com.study.sockets;
 
+import com.alibaba.fastjson2.JSONObject;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import javax.websocket.*;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 @Component
 @Slf4j
 @ServerEndpoint("/websocket/{userId}") //此注解相当于设置访问URL
@@ -38,8 +50,8 @@ public class WebSocket {
     public void onMessage(String message) {
         log.debug("【websocket消息】收到客户端消息: {}", message);
         JSONObject obj = new JSONObject();
-        obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_CHECK);//业务类型
-        obj.put(WebsocketConst.MSG_TXT, "心跳响应");//消息内容
+        obj.put("11", "检查");//业务类型
+        obj.put("22", "心跳响应");//消息内容
         session.getAsyncRemote().sendText(obj.toJSONString());
     }
 

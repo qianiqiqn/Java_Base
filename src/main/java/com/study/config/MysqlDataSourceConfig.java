@@ -15,12 +15,11 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * @author: pengzhe
- * @Date: 2021/11/30 9:40
+ * @author: wenqianqian
  * @Desc: mysql数据源
  */
 @Configuration
-@MapperScan(basePackages = "com.sutpc.software.mapper.mysql", sqlSessionTemplateRef = "mysqlSqlTemplate")
+@MapperScan(basePackages = "com.sutpc.software.mapper.mysql", sqlSessionTemplateRef = "mysqlSqlSessionFactory")
 public class MysqlDataSourceConfig {
 
     @Primary
