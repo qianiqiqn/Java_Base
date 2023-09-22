@@ -116,7 +116,7 @@ devops:
   ciType: Sutpc_test
   flag: false
 
-
+## mybatis 配置
   mybatis:
     mapper-locations: mapper/*.xml
     type-aliases-package: com.dy.details.pojo
