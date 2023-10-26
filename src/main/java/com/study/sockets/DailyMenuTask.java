@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class DailyMenuTask {
 
     @Resource
-    private WebSocket webSocket;
+    private WebSocketServer webSocket;
 
 //    @Autowired
 //    private DailyMenuMapper dailyMenuMapper;
