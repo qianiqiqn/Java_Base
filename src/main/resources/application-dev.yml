@@ -1,6 +1,12 @@
-
 ###  示例
+server:
+  port: 10111
+  servlet:
+    context-path: /order
+
 spring:
+  application:
+    name: java_base
   datasource:
     db-mysql:
       url: jdbc:mysql://10.26.0.30:3306/iot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
@@ -58,6 +64,7 @@ spring:
         enable-auto-commit: true
       alarm:
         topic: sutpc-data-alarm
+## 分页
 pagehelper:
   offset-as-page-num: true
   row-bounds-with-count: true
