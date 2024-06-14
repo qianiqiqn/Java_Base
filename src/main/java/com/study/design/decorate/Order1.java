@@ -7,6 +7,9 @@ import com.study.design.decorate.condiment.Mocha;
 import com.study.design.decorate.condiment.Soy;
 import com.study.design.decorate.condiment.Whip;
 
+/**
+ * 装饰者模式
+ */
 public class Order1 {
     public static void main(String[] args) {
         Beverage beverage = new Espresso("小杯",1.0);
