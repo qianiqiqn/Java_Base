@@ -129,3 +129,8 @@ devops:
     type-aliases-package: com.dy.details.pojo
     configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+## 日志文件配置
+logging:
+  file:
+    path=: /airport-logs

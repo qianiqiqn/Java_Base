@@ -1,10 +1,7 @@
 package com.study.encryption;
 
 import javax.crypto.Cipher;
-import java.security.KeyFactory;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
+import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
@@ -185,6 +182,28 @@ public class RsaUtil {
         signature.update(data);
         //得到验证结果
         return signature.verify(sign);
+    }
+
+    /**
+     * 生成密钥对
+     * @throws NoSuchAlgorithmException
+     */
+    public void creatKey() throws NoSuchAlgorithmException {
+        // 生成密钥对对象
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+
+        // 初始化密钥对生成器
+        keyPairGenerator.initialize(2048);
+
+        // 生成密钥对
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
+
+        // 获取公钥和私钥
+        PublicKey publicKey = keyPair.getPublic();
+        PrivateKey privateKey = keyPair.getPrivate();
+
+        System.out.println("公钥：" + Base64.getEncoder().encodeToString(publicKey.getEncoded()));
+        System.out.println("私钥：" + Base64.getEncoder().encodeToString(privateKey.getEncoded()));
     }
 
 }
